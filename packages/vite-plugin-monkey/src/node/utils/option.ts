@@ -1,5 +1,5 @@
-import { jsdelivr } from '../cdn';
-import { getProjectPkg } from './pkg';
+import { jsdelivr } from '../cdn.ts';
+import { getProjectPkg } from './pkg.ts';
 import type {
   IArray,
   Mod2UrlFn,
@@ -8,7 +8,7 @@ import type {
   PkgOptions,
   ResolvedMonkeyOption,
   Thenable,
-} from './types';
+} from './types.ts';
 
 export const resolvedOption = async (
   pluginOption: MonkeyOption,

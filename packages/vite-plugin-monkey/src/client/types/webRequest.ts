@@ -1,4 +1,4 @@
-import type { GmAbortHandle } from './_share';
+import type { GmAbortHandle } from './_share.ts';
 
 /**
  * @see https://www.tampermonkey.net/documentation.php#api:GM_webRequest

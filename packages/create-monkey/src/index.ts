@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { blue, cyan, green, magenta, red, reset, yellow } from 'kolorist';
 import minimist from 'minimist';
 import * as fs from 'node:fs';

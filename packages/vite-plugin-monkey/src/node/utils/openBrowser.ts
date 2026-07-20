@@ -5,7 +5,7 @@ import open from 'open';
 import type { Options } from 'open';
 import spawn from 'cross-spawn';
 import colors from 'picocolors';
-import { compatResolve } from './others';
+import { compatResolve } from './others.ts';
 
 const VITE_PACKAGE_DIR = path.dirname(compatResolve('vite/package.json'));
 

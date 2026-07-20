@@ -1,4 +1,4 @@
-import { stringifyFunction } from './others';
+import { stringifyFunction } from './others.ts';
 
 const htmlText = /* html */ `
 <!DOCTYPE html>

@@ -57,7 +57,7 @@ const targetCode = [
 // pnpm -F vite-plugin-monkey exec tsx ./scripts/transform_context.ts
 // This command is used to avoid the tedious process of manually copying the code`,
   `export {}`,
-  `import { monkeyWindow as w } from './window';`,
+  `import { monkeyWindow as w } from './window.ts';`,
 ].concat(
   members.map((node) => {
     const comment = getNodeLeadingComment(node);

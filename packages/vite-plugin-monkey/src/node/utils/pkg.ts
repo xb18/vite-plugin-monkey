@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { normalizePath } from 'vite';
-import { compatResolve, existFile } from './others';
+import { compatResolve, existFile } from './others.ts';
 
 interface RawPackageJson {
   name?: string;

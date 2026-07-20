@@ -2,8 +2,8 @@ import type {
   GmAbortHandle,
   GmProgressEventBase,
   GmReponseEventListener,
-} from './_share';
-import type { GmResponseEvent } from './xmlhttpRequest';
+} from './_share.ts';
+import type { GmResponseEvent } from './xmlhttpRequest.ts';
 
 export interface GmDownloadErrorEvent {
   /**

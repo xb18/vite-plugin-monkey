@@ -1,4 +1,4 @@
-import type { GmAnyFuntion, GmVoidCallback } from './_share';
+import type { GmAnyFuntion, GmVoidCallback } from './_share.ts';
 
 export interface GmAudioMuteDetails {
   isMuted: boolean;

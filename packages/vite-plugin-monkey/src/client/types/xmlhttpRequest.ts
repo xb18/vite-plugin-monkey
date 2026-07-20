@@ -2,7 +2,7 @@ import type {
   GmAbortHandle,
   GmProgressEventBase,
   GmReponseEventListener,
-} from './_share';
+} from './_share.ts';
 
 export interface GmResponseTypeMap {
   text: string;

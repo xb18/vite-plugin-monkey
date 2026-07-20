@@ -1,6 +1,6 @@
 import { normalizePath } from 'vite';
-import type { ResolvedMonkeyOption } from '../utils/types';
-import { getModuleRealInfo } from '../utils/pkg';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
+import { getModuleRealInfo } from '../utils/pkg.ts';
 import type { Plugin } from 'vite';
 
 export const externalGlobalsFactory = (

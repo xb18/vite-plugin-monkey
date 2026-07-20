@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import { gmIdentifiers } from '../utils/gmApi';
+import { gmIdentifiers } from '../utils/gmApi.ts';
 
 // https://github.com/Tampermonkey/tampermonkey/issues/1567
 const clientSourceId = 'vite-plugin-monkey/dist/client';

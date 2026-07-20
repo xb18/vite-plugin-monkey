@@ -1,4 +1,4 @@
-import type { GmWebRequestRule } from './webRequest';
+import type { GmWebRequestRule } from './webRequest.ts';
 
 interface GmInfoResourceType {
   name: string;

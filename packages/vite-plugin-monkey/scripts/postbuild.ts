@@ -1,1 +1,1 @@
-import './transform_type';
+import './transform_type.ts';

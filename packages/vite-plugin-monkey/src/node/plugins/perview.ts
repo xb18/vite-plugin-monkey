@@ -1,8 +1,8 @@
 import path from 'node:path';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { normalizePath } from 'vite';
-import { walk } from '../utils/others';
-import { fcToHtml, previewTemplate } from '../utils/template';
+import { walk } from '../utils/others.ts';
+import { fcToHtml, previewTemplate } from '../utils/template.ts';
 
 export const perviewFactory = (): Plugin => {
   let viteConfig: ResolvedConfig;

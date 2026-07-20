@@ -1,13 +1,17 @@
-import { grantNames, type GrantType } from '../utils/gmApi';
-import type { ResolvedMonkeyOption, IArray, LocaleType } from '../utils/types';
-import type { GreasemonkeyUserScript, GreaseRunAt } from './greasemonkey';
+import { grantNames, type GrantType } from '../utils/gmApi.ts';
+import type {
+  ResolvedMonkeyOption,
+  IArray,
+  LocaleType,
+} from '../utils/types.ts';
+import type { GreasemonkeyUserScript, GreaseRunAt } from './greasemonkey.ts';
 import type {
   AntifeatureType,
   TampermonkeyUserScript,
   TamperRunAt,
-} from './tampermonkey';
-import type { ViolentmonkeyUserScript, ViolentRunAt } from './violentmonkey';
-import type { ViolentInjectInto } from './violentmonkey';
+} from './tampermonkey.ts';
+import type { ViolentmonkeyUserScript, ViolentRunAt } from './violentmonkey.ts';
+import type { ViolentInjectInto } from './violentmonkey.ts';
 
 export type {
   GreasemonkeyUserScript,

@@ -1,25 +1,25 @@
-import type { GmAddElementType } from './addElement';
-import type { GmAddStyleType } from './addStyle';
-import type { GmAudioType } from './audio';
-import type { GmCookieType } from './cookie';
-import type { GmDownloadType } from './download';
-import type { GmGetResourceTextType } from './getResourceText';
-import type { GmGetResourceURLType } from './getResourceURL';
-import type { GmType } from './gm';
-import type { GmInfoType } from './info';
-import type { GmLogType } from './log';
+import type { GmAddElementType } from './addElement.ts';
+import type { GmAddStyleType } from './addStyle.ts';
+import type { GmAudioType } from './audio.ts';
+import type { GmCookieType } from './cookie.ts';
+import type { GmDownloadType } from './download.ts';
+import type { GmGetResourceTextType } from './getResourceText.ts';
+import type { GmGetResourceURLType } from './getResourceURL.ts';
+import type { GmType } from './gm.ts';
+import type { GmInfoType } from './info.ts';
+import type { GmLogType } from './log.ts';
 import type {
   GmRegisterMenuCommandType,
   GmUnregisterMenuCommandType,
-} from './menuCommand';
-import type { GmNotificationType } from './notification';
-import type { GmSetClipboardType } from './setClipboard';
+} from './menuCommand.ts';
+import type { GmNotificationType } from './notification.ts';
+import type { GmSetClipboardType } from './setClipboard.ts';
 import type {
   GmGetTabsType,
   GmGetTabType,
   GmOpenInTabType,
   GmSaveTab,
-} from './tab';
+} from './tab.ts';
 import type {
   GmAddValueChangeListenerType,
   GmDeleteValuesType,
@@ -30,9 +30,9 @@ import type {
   GmRemoveValueChangeListenerType,
   GmSetValuesType,
   GmSetValueType,
-} from './value';
-import type { GmWebRequestType } from './webRequest';
-import type { GmXmlhttpRequestType } from './xmlhttpRequest';
+} from './value.ts';
+import type { GmWebRequestType } from './webRequest.ts';
+import type { GmXmlhttpRequestType } from './xmlhttpRequest.ts';
 
 export interface GmContextType {
   unsafeWindow: typeof window;

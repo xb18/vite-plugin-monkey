@@ -1,13 +1,13 @@
 import type { Plugin } from 'vite';
-import factorys from './plugins';
-import { resolvedOption } from './utils/option';
-import type { MonkeyOption, ResolvedMonkeyOption } from './utils/types';
-import { dataUrl } from './utils/others';
+import factorys from './plugins/index.ts';
+import { resolvedOption } from './utils/option.ts';
+import type { MonkeyOption, ResolvedMonkeyOption } from './utils/types.ts';
+import { dataUrl } from './utils/others.ts';
 import type { InlinePreset } from 'unimport';
-import { gmIdentifiers } from './utils/gmApi';
+import { gmIdentifiers } from './utils/gmApi.ts';
 
-export type * from './types';
-export * as cdn from './cdn';
+export type * from './types.ts';
+export * as cdn from './cdn.ts';
 
 export default (pluginOption: MonkeyOption): Plugin[] => {
   let option: Promise<ResolvedMonkeyOption>;

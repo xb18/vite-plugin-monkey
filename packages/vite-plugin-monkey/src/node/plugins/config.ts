@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import type { ResolvedMonkeyOption } from '../utils/types';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
 
 export const configFactory = (
   getOption: () => Promise<ResolvedMonkeyOption>,

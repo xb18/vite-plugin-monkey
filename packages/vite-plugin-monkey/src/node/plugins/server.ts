@@ -3,9 +3,9 @@ import type { ServerResponse } from 'node:http';
 import path from 'node:path';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { normalizePath } from 'vite';
-import { finalMonkeyOptionToComment } from '../userscript';
-import { gmIdentifiers } from '../utils/gmApi';
-import { openBrowser } from '../utils/openBrowser';
+import { finalMonkeyOptionToComment } from '../userscript/index.ts';
+import { gmIdentifiers } from '../utils/gmApi.ts';
+import { openBrowser } from '../utils/openBrowser.ts';
 import {
   existFile,
   isFirstBoot,
@@ -13,9 +13,9 @@ import {
   safeURL,
   simpleHash,
   stringifyFunction,
-} from '../utils/others';
-import { mountGmApiFn, serverInjectFn } from '../utils/template';
-import type { ResolvedMonkeyOption } from '../utils/types';
+} from '../utils/others.ts';
+import { mountGmApiFn, serverInjectFn } from '../utils/template.ts';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
 
 const urlPrefix = '/__vite-plugin-monkey.';
 export const installUserPath = urlPrefix + 'install.user.js';

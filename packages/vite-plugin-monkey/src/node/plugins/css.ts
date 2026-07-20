@@ -6,8 +6,8 @@ import {
   getProgramImportNodes,
   getSafeIdentifier,
   getUpperCaseName,
-} from '../utils/others';
-import type { ResolvedMonkeyOption } from '../utils/types';
+} from '../utils/others.ts';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
 
 export const cssModuleId = 'virtual:monkey-css';
 export const virtualCssModuleId = '\0' + cssModuleId;

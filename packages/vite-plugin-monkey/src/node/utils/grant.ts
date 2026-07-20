@@ -1,6 +1,6 @@
 import * as acornWalk from 'acorn-walk';
 import type { OutputChunk, PluginContext } from 'rolldown';
-import { grantNames } from './gmApi';
+import { grantNames } from './gmApi.ts';
 
 export const collectGrant = (
   context: PluginContext,

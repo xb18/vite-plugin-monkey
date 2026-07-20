@@ -4,9 +4,9 @@ import {
   getProgramImportNodes,
   getSafeIdentifier,
   getUpperCaseName,
-} from '../utils/others';
-import { getModuleRealInfo } from '../utils/pkg';
-import type { ResolvedMonkeyOption } from '../utils/types';
+} from '../utils/others.ts';
+import { getModuleRealInfo } from '../utils/pkg.ts';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
 
 const loaderModuleCode = `
 import { GM_addStyle, GM_getResourceText, GM_getResourceURL } from 'vite-plugin-monkey/dist/client';

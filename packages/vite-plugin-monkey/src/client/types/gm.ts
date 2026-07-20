@@ -1,24 +1,24 @@
-import type { GmAsyncAddElementType } from './addElement';
-import type { GmAsyncAddStyleType } from './addStyle';
-import type { GmAsyncAudioType } from './audio';
-import type { GmAsyncCookieType } from './cookie';
-import type { GmAsyncDownloadType } from './download';
-import type { GmAsyncGetResourceTextType } from './getResourceText';
-import type { GmAsyncGetResourceURLType } from './getResourceURL';
-import type { GmInfoType } from './info';
-import type { GmAsyncLogType } from './log';
+import type { GmAsyncAddElementType } from './addElement.ts';
+import type { GmAsyncAddStyleType } from './addStyle.ts';
+import type { GmAsyncAudioType } from './audio.ts';
+import type { GmAsyncCookieType } from './cookie.ts';
+import type { GmAsyncDownloadType } from './download.ts';
+import type { GmAsyncGetResourceTextType } from './getResourceText.ts';
+import type { GmAsyncGetResourceURLType } from './getResourceURL.ts';
+import type { GmInfoType } from './info.ts';
+import type { GmAsyncLogType } from './log.ts';
 import type {
   GmAsnycUnregisterMenuCommandType,
   GmAsyncRegisterMenuCommandType,
-} from './menuCommand';
-import type { GmAsyncNotificationType } from './notification';
-import type { GmAsyncSetClipboardType } from './setClipboard';
+} from './menuCommand.ts';
+import type { GmAsyncNotificationType } from './notification.ts';
+import type { GmAsyncSetClipboardType } from './setClipboard.ts';
 import type {
   GmAsyncGetTabsType,
   GmAsyncGetTabType,
   GmAsyncOpenInTabType,
   GmAsyncSaveTab,
-} from './tab';
+} from './tab.ts';
 import type {
   GmAsyncAddValueChangeListenerType,
   GmAsyncDeleteValuesType,
@@ -29,9 +29,9 @@ import type {
   GmAsyncRemoveValueChangeListenerType,
   GmAsyncSetValuesType,
   GmAsyncSetValueType,
-} from './value';
-import type { GmAsyncWebRequestType } from './webRequest';
-import type { GmAsyncXmlhttpRequestType } from './xmlhttpRequest';
+} from './value.ts';
+import type { GmAsyncWebRequestType } from './webRequest.ts';
+import type { GmAsyncXmlhttpRequestType } from './xmlhttpRequest.ts';
 
 export interface GmType {
   info: GmInfoType;

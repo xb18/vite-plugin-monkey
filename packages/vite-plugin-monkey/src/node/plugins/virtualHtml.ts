@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
-import { virtualHtmlTemplate, fcToHtml } from '../utils/template';
-import { installUserPath } from './server';
+import { virtualHtmlTemplate, fcToHtml } from '../utils/template.ts';
+import { installUserPath } from './server.ts';
 
 export const virtualHtmlFactory = (): Plugin => {
   return {

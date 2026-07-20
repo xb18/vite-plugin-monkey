@@ -1,4 +1,4 @@
-import type { IArray, LocaleType } from '../utils/types';
+import type { IArray, LocaleType } from '../utils/types.ts';
 
 export type ViolentRunAt = 'document-end' | 'document-start' | 'document-idle';
 export type ViolentInjectInto = 'page' | 'content' | 'auto';

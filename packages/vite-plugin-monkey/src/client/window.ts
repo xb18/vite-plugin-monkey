@@ -1,4 +1,4 @@
-import type { MonkeyWindow } from './types/_context';
+import type { MonkeyWindow } from './types/_context.ts';
 
 export const monkeyWindow: MonkeyWindow = (() => {
   // @ts-ignore

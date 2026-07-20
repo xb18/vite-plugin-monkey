@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import module from 'node:module';
 import type systemjsPkgT from 'systemjs/package.json';
-import { dataUrl } from './others';
-import type { ModuleToUrlFc } from './types';
+import { dataUrl } from './others.ts';
+import type { ModuleToUrlFc } from './types.ts';
 
 const _require = module.createRequire(import.meta.url);
 

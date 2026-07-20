@@ -4,7 +4,7 @@
 
 export {};
 
-import { monkeyWindow as w } from './window';
+import { monkeyWindow as w } from './window.ts';
 
 export const unsafeWindow = /* @__PURE__ */ (() => w.unsafeWindow)();
 

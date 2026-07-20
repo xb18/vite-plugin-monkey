@@ -1,4 +1,4 @@
-import type { ModuleToUrlFc } from './utils/types';
+import type { ModuleToUrlFc } from './utils/types.ts';
 
 /**
  * `https://cdn.jsdelivr.net/npm/${name}@${version}/${pathname}`

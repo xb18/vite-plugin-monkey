@@ -1,4 +1,4 @@
-import type { GmVoidCallback } from './_share';
+import type { GmVoidCallback } from './_share.ts';
 
 interface GmPartitionKeyType {
   topLevelSite?: string;

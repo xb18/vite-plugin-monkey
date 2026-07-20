@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import type { FinalUserScript, MonkeyUserScript } from '../userscript';
+import type { FinalUserScript, MonkeyUserScript } from '../userscript/index.ts';
 
 export type Thenable<T> = T | Promise<T>;
 

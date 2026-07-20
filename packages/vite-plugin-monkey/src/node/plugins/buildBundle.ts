@@ -2,20 +2,20 @@ import * as acornWalk from 'acorn-walk';
 import type { OutputChunk, RolldownOutput } from 'rolldown';
 import type { Plugin, ResolvedConfig } from 'vite';
 import { build } from 'vite';
-import { finalMonkeyOptionToComment } from '../userscript';
-import { collectGrant } from '../utils/grant';
+import { finalMonkeyOptionToComment } from '../userscript/index.ts';
+import { collectGrant } from '../utils/grant.ts';
 import {
   getCssModuleCode,
   moduleExportExpressionWrapper,
-} from '../utils/others';
-import { getSystemjsRequireUrls, getSystemjsTexts } from '../utils/systemjs';
+} from '../utils/others.ts';
+import { getSystemjsRequireUrls, getSystemjsTexts } from '../utils/systemjs.ts';
 import {
   getSafeTlaIdentifier,
   transformIdentifierToTla,
   transformTlaToIdentifier,
-} from '../utils/topLevelAwait';
-import type { ResolvedMonkeyOption } from '../utils/types';
-import { cssModuleId, virtualCssModuleId } from './css';
+} from '../utils/topLevelAwait.ts';
+import type { ResolvedMonkeyOption } from '../utils/types.ts';
+import { cssModuleId, virtualCssModuleId } from './css.ts';
 
 const __entry_name = `__monkey.entry.js`;
 const cssModuleEntryId = cssModuleId + `-entry`;

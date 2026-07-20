@@ -1,5 +1,5 @@
-import { getUpperCaseName } from '../utils/others';
-import type { MonkeyPluginFactory } from '../utils/types';
+import { getUpperCaseName } from '../utils/others.ts';
+import type { MonkeyPluginFactory } from '../utils/types.ts';
 
 export const styleFactory: MonkeyPluginFactory = (_getOption, pluginOption) => {
   if (pluginOption.styleImport === false) return;

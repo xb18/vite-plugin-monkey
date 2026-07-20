@@ -3,10 +3,10 @@ export type {
   TampermonkeyUserScript,
   ViolentmonkeyUserScript,
   MonkeyUserScript,
-} from './userscript';
+} from './userscript/index.ts';
 
 export type {
   MonkeyOption,
   ExternalGlobals,
   ExternalResource,
-} from './utils/types';
+} from './utils/types.ts';
