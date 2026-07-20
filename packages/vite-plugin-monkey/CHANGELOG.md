@@ -1,3 +1,3 @@
 # What's Changed
 
-- fix: preserve build.rolldownOptions.output (#289)
+- feat: support web workers in dev (#291)
