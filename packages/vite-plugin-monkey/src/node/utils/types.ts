@@ -365,7 +365,7 @@ export interface MonkeyOption {
 
 export interface MonkeyPluginFactory {
   (
-    getOption: () => Promise<ResolvedMonkeyOption>,
+    getOption: (root?: string) => Promise<ResolvedMonkeyOption>,
     pluginOption: MonkeyOption,
   ): Plugin | undefined;
 }

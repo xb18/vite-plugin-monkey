@@ -67,7 +67,7 @@ const getResNameTuple = (
 };
 
 export const externalResourceFactory = (
-  getOption: () => Promise<ResolvedMonkeyOption>,
+  getOption: (root?: string) => Promise<ResolvedMonkeyOption>,
 ): Plugin => {
   let option: ResolvedMonkeyOption;
   let viteConfig: ResolvedConfig;
@@ -81,10 +81,13 @@ export const externalResourceFactory = (
     name: 'monkey:externalResource',
     enforce: 'post',
     apply: 'build',
-    async config() {
-      option = await getOption();
-      mrmime = await import('mrmime');
-      resKeys = Object.keys(option.build.externalResource);
+    config: {
+      order: 'post',
+      async handler(config) {
+        option = await getOption(config.root);
+        mrmime = await import('mrmime');
+        resKeys = Object.keys(option.build.externalResource);
+      },
     },
     configResolved(config) {
       viteConfig = config;
@@ -132,7 +135,7 @@ export const externalResourceFactory = (
       const [importName, dynamic] = getResNameTuple(id) || [];
       if (dynamic === undefined) return;
       if (!importName) return;
-      const pkg = await getModuleRealInfo(importName);
+      const pkg = await getModuleRealInfo(importName, option.entry);
       const resOption = option.build.externalResource[importName];
       const resourceName = await resOption.resourceName({ ...pkg, importName });
       const resourceUrl = await resOption.resourceUrl({ ...pkg, importName });

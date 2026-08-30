@@ -53,7 +53,7 @@ export default undefined;
 `.trimStart();
 
 export const cssFactory = (
-  getOption: () => Promise<ResolvedMonkeyOption>,
+  getOption: (root?: string) => Promise<ResolvedMonkeyOption>,
 ): Plugin => {
   let option: ResolvedMonkeyOption;
   const isCssImport = async (
@@ -83,15 +83,18 @@ export const cssFactory = (
     name: 'monkey:css',
     apply: 'build',
     enforce: 'post',
-    async config() {
-      option = await getOption();
-      return {
-        build: {
-          rolldownOptions: {
-            external: [cssModuleId],
+    config: {
+      order: 'post',
+      async handler(config) {
+        option = await getOption(config.root);
+        return {
+          build: {
+            rolldownOptions: {
+              external: [cssModuleId],
+            },
           },
-        },
-      };
+        };
+      },
     },
     resolveId(source) {
       if (source.endsWith(staticCssIdSuffix)) return source;

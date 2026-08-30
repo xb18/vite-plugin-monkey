@@ -1,5 +1,5 @@
 // The current code file is automatically generated using the following command
-// pnpm -F vite-plugin-monkey exec tsx ./scripts/transform_context.ts
+// pnpm -F vite-plugin-monkey exec node ./scripts/transform_context.ts
 // This command is used to avoid the tedious process of manually copying the code
 
 export {};

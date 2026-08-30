@@ -27,7 +27,7 @@ const polyfillId = '\0vite/legacy-polyfills';
 const systemJsImportMapPrefix = `user`;
 
 export const buildBundleFactory = (
-  getOption: () => Promise<ResolvedMonkeyOption>,
+  getOption: (root?: string) => Promise<ResolvedMonkeyOption>,
 ): Plugin => {
   let option: ResolvedMonkeyOption;
   let viteConfig: ResolvedConfig;
@@ -35,8 +35,11 @@ export const buildBundleFactory = (
     name: 'monkey:buildBundle',
     apply: 'build',
     enforce: 'post',
-    async config() {
-      option = await getOption();
+    config: {
+      order: 'post',
+      async handler(config) {
+        option = await getOption(config.root);
+      },
     },
     async configResolved(resolvedConfig) {
       viteConfig = resolvedConfig;

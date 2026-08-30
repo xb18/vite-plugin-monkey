@@ -9,8 +9,8 @@ export const isFirstBoot = (): boolean => {
   return (Reflect.get(globalThis, '__vite_start_time') ?? 0) < 1000;
 };
 
-export const compatResolve = (id: string) => {
-  return resolve(id, pathToFileURL(process.cwd() + '/any.js').href);
+export const compatResolve = (id: string, entry: string) => {
+  return resolve(id, pathToFileURL(entry).href);
 };
 
 export const existFile = async (path: string) => {

@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { jsdelivr } from '../cdn.ts';
 import { getProjectPkg } from './pkg.ts';
 import type {
@@ -12,7 +13,9 @@ import type {
 
 export const resolvedOption = async (
   pluginOption: MonkeyOption,
+  root: string,
 ): Promise<ResolvedMonkeyOption> => {
+  const entry = path.resolve(root, pluginOption.entry);
   if (pluginOption.format) {
     setTimeout(() => {
       console.log(
@@ -115,7 +118,7 @@ export const resolvedOption = async (
     Object.entries(externalGlobals2).forEach((s) => externalGlobals.push(s));
   }
 
-  const projectPkg = await getProjectPkg();
+  const projectPkg = await getProjectPkg(root);
 
   const { grant = [], $extra = [] } = pluginOption.userscript ?? {};
   let {
@@ -212,7 +215,11 @@ export const resolvedOption = async (
     unwrap = false,
   } = pluginOption.userscript ?? {};
 
-  const { fileName = projectPkg.name + '.user.js' } = build;
+  const {
+    fileName = projectPkg.name
+      ? projectPkg.name + '.user.js'
+      : 'monkey.user.js',
+  } = build;
   let { metaFileName } = build;
   if (typeof metaFileName == 'string') {
     const t = metaFileName;
@@ -269,7 +276,7 @@ export const resolvedOption = async (
       webRequest: webRequest.map((w) => JSON.stringify(w)),
     },
     clientAlias: pluginOption.clientAlias ?? '$',
-    entry: pluginOption.entry,
+    entry,
     align: pluginOption.align === false ? 0 : (pluginOption.align ?? 2),
     generate: pluginOption.generate ?? ((uOptions) => uOptions.userscript),
     server: {

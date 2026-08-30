@@ -29,7 +29,7 @@ const localOrigin = `http://${localHost}`;
 const htmlPlaceholder = '<html><head></head><body></body></html>';
 
 export const serverFactory = (
-  getOption: () => Promise<ResolvedMonkeyOption>,
+  getOption: (root?: string) => Promise<ResolvedMonkeyOption>,
 ): Plugin => {
   let option: ResolvedMonkeyOption;
   let viteConfig: ResolvedConfig;
@@ -37,29 +37,32 @@ export const serverFactory = (
   return {
     name: 'monkey:server',
     apply: 'serve',
-    async config(userConfig) {
-      option = await getOption();
-      for (const [k, v] of Object.entries(option.userscript.name)) {
-        Reflect.set(option.userscript.name, k, option.server.prefix(v));
-      }
-      option.userscript.grant.add('*');
-      // see #270
-      monkeyWindowKey =
-        `__monkeyWindow-` +
-        simpleHash(
-          await finalMonkeyOptionToComment(option, new Set(), 'serve'),
-        );
-      return {
-        preview: {
-          host: userConfig.preview?.host ?? localHost,
-          cors: true,
-        },
-        server: {
-          host: userConfig.server?.host ?? localHost,
-          open: userConfig.server?.open ?? option.server.open,
-          cors: true,
-        },
-      };
+    config: {
+      order: 'post',
+      async handler(userConfig) {
+        option = await getOption(userConfig.root);
+        for (const [k, v] of Object.entries(option.userscript.name)) {
+          Reflect.set(option.userscript.name, k, option.server.prefix(v));
+        }
+        option.userscript.grant.add('*');
+        // see #270
+        monkeyWindowKey =
+          `__monkeyWindow-` +
+          simpleHash(
+            await finalMonkeyOptionToComment(option, new Set(), 'serve'),
+          );
+        return {
+          preview: {
+            host: userConfig.preview?.host ?? localHost,
+            cors: true,
+          },
+          server: {
+            host: userConfig.server?.host ?? localHost,
+            open: userConfig.server?.open ?? option.server.open,
+            cors: true,
+          },
+        };
+      },
     },
     async configResolved(resolvedConfig) {
       viteConfig = resolvedConfig;
@@ -174,12 +177,17 @@ export const serverFactory = (
 
       if (option.server.open) {
         const hash = simpleHash(viteConfig.configFile);
-        const cacheUserPath = `node_modules/.vite/__vite-plugin-monkey.cache.${hash}.user.js`;
+        const cacheUserPath = path.join(
+          viteConfig.cacheDir,
+          `__vite-plugin-monkey.cache.${hash}.user.js`,
+        );
         let cacheComment = '';
         if (await existFile(cacheUserPath)) {
           cacheComment = (await fs.readFile(cacheUserPath)).toString('utf-8');
         } else {
-          await fs.mkdir(path.dirname(cacheUserPath)).catch(() => {});
+          await fs
+            .mkdir(path.dirname(cacheUserPath), { recursive: true })
+            .catch(() => {});
         }
         const newComment = await finalMonkeyOptionToComment(
           option,
@@ -188,7 +196,7 @@ export const serverFactory = (
         );
         const installUrl = Reflect.get(globalThis, restartStoreKey);
         if (!isFirstBoot() && cacheComment != newComment && installUrl) {
-          openBrowser(installUrl);
+          openBrowser(installUrl, option.entry);
           setTimeout(() => {
             console.log('[plugin-monkey] reopen, config comment has changed');
           });

@@ -20,6 +20,7 @@ catalog:
   acorn-walk: ^8.3.5
   cross-spawn: ^7.0.6
   element-plus: 2.13.7
+  esbuild: 0.27.7
   eslint: 10.2.0
   eslint-config-prettier: 10.1.8
   eslint-plugin-unused-imports: 4.4.1
@@ -49,7 +50,6 @@ catalog:
   systemjs: ^6.15.1
   terser: 5.46.1
   tsdown: 0.21.10
-  tsx: 4.21.0
   typescript: 6.0.2
   typescript-eslint: 8.58.1
   unimport: 6.1.0
@@ -61,6 +61,9 @@ catalog:
 
 catalogMode: strict
 cleanupUnusedCatalogs: true
+
+ignoredOptionalDependencies:
+  - tsx
 
 publicHoistPattern:
   - rolldown

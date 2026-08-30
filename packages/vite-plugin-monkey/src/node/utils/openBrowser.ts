@@ -7,14 +7,12 @@ import spawn from 'cross-spawn';
 import colors from 'picocolors';
 import { compatResolve } from './others.ts';
 
-const VITE_PACKAGE_DIR = path.dirname(compatResolve('vite/package.json'));
-
 // copy from https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/openBrowser.ts
 
 /**
  * Reads the BROWSER environment variable and decides what to do with it.
  */
-export function openBrowser(url: string, opt?: string): void {
+export function openBrowser(url: string, entry: string, opt?: string): void {
   // The browser executable to open.
   // See https://github.com/sindresorhus/open#app for documentation.
   const browser = typeof opt === 'string' ? opt : process.env.BROWSER || '';
@@ -24,7 +22,7 @@ export function openBrowser(url: string, opt?: string): void {
     const browserArgs = process.env.BROWSER_ARGS
       ? process.env.BROWSER_ARGS.split(' ')
       : [];
-    startBrowserProcess(browser, browserArgs, url);
+    startBrowserProcess(browser, browserArgs, url, entry);
   }
 }
 
@@ -63,6 +61,7 @@ async function startBrowserProcess(
   browser: string | undefined,
   browserArgs: string[],
   url: string,
+  entry: string,
 ) {
   // If we're on OS X, the user hasn't specifically
   // requested a different browser, we can try opening
@@ -83,11 +82,14 @@ async function startBrowserProcess(
           ? preferredOSXBrowser
           : supportedChromiumBrowsers.find((b) => ps.includes(b));
       if (openedBrowser) {
+        const vitePackageDir = path.dirname(
+          compatResolve('vite/package.json', entry),
+        );
         // Try our best to reuse existing tab with AppleScript
         await execAsync(
           `osascript openChrome.applescript "${url}" "${openedBrowser}"`,
           {
-            cwd: join(VITE_PACKAGE_DIR, 'bin'),
+            cwd: join(vitePackageDir, 'bin'),
           },
         );
         return true;

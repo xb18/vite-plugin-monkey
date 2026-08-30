@@ -25,11 +25,22 @@ interface PackageJson {
   bugs?: string;
 }
 
-export const getProjectPkg = async (): Promise<PackageJson> => {
-  const rawPkg: RawPackageJson | undefined = await fs
-    .readFile(path.resolve(process.cwd(), 'package.json'), 'utf-8')
-    .then(JSON.parse)
-    .catch(() => {});
+export const getProjectPkg = async (root: string): Promise<PackageJson> => {
+  let dir = path.resolve(root);
+  let rawPkg: RawPackageJson | undefined;
+  while (true) {
+    const candidate: RawPackageJson | undefined = await fs
+      .readFile(path.join(dir, 'package.json'), 'utf-8')
+      .then(JSON.parse)
+      .catch(() => {});
+    if (candidate) {
+      rawPkg = candidate;
+      break;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
 
   const pkg: PackageJson = {};
   if (!rawPkg) return pkg;
@@ -64,23 +75,28 @@ export const getProjectPkg = async (): Promise<PackageJson> => {
 const isScopePkg = (name: string): boolean => name.startsWith('@');
 const resolveModuleFromPath = async (
   subpath: string,
+  entry: string,
 ): Promise<string | undefined> => {
-  const p = normalizePath(process.cwd()).split('/');
-  for (let i = p.length; i > 0; i--) {
-    const p2 = `${p.slice(0, i).join('/')}/node_modules/${subpath}`;
-    if (await existFile(p2)) {
-      return p2;
-    }
+  let dir = path.dirname(entry);
+  while (true) {
+    const modulePath = path.join(dir, 'node_modules', subpath);
+    if (await existFile(modulePath)) return modulePath;
+    const parent = path.dirname(dir);
+    if (parent === dir) return;
+    dir = parent;
   }
 };
 
-const compatResolveModulePath = async (id: string): Promise<string> => {
+const compatResolveModulePath = async (
+  id: string,
+  entry: string,
+): Promise<string> => {
   try {
-    return compatResolve(id);
+    return compatResolve(id, entry);
   } catch (e) {
     // not defined in pkg/package.json but exist in pkg/subpath
     // https://github.com/lisonge/vite-plugin-monkey/issues/169
-    const r = await resolveModuleFromPath(id);
+    const r = await resolveModuleFromPath(id, entry);
     if (!r) {
       throw e;
     }
@@ -88,13 +104,12 @@ const compatResolveModulePath = async (id: string): Promise<string> => {
   }
 };
 
-export const getModuleRealInfo = async (importName: string) => {
+export const getModuleRealInfo = async (importName: string, entry: string) => {
   const nameNoQuery = normalizePath(importName.split('?')[0]);
   const resolveName = await (async () => {
-    const n = normalizePath(await compatResolveModulePath(nameNoQuery)).replace(
-      /.*\/node_modules\/[^/]+\//,
-      '',
-    );
+    const n = normalizePath(
+      await compatResolveModulePath(nameNoQuery, entry),
+    ).replace(/.*\/node_modules\/[^/]+\//, '');
     if (isScopePkg(importName)) {
       return n.split('/').slice(1).join('/');
     }
@@ -106,12 +121,12 @@ export const getModuleRealInfo = async (importName: string) => {
   while (nameList.length > 0) {
     name = nameList.join('/');
     const filePath = await (async () => {
-      const p = await resolveModuleFromPath(`${name}/package.json`);
+      const p = await resolveModuleFromPath(`${name}/package.json`, entry);
       if (p) {
         return p;
       }
       try {
-        return compatResolve(`${name}/package.json`);
+        return compatResolve(`${name}/package.json`, entry);
       } catch {
         return undefined;
       }

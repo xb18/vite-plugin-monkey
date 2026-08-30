@@ -15,7 +15,10 @@ export const perviewFactory = (): Plugin => {
     async configurePreviewServer(server) {
       server.middlewares.use(async (req, res, next) => {
         if (['/', '/index.html'].includes((req.url ?? '').split('?')[0])) {
-          const distDirPath = path.join(process.cwd(), viteConfig.build.outDir);
+          const distDirPath = path.resolve(
+            viteConfig.root,
+            viteConfig.build.outDir,
+          );
           const urls: string[] = [];
           for await (const pathname of walk(distDirPath)) {
             if (pathname.endsWith('.user.js')) {
